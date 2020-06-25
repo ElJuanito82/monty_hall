@@ -1,0 +1,142 @@
+import random
+import time
+
+doors = [1, 2, 3]
+
+car = random.choice(doors)
+doors.remove(car)
+goats = doors
+
+print("\n" * 40)
+
+print("""
+     #######################################################
+     ##  __  __             _           _    _       _ _  ##
+     ## |  \/  |  THE      | |         | |  | |     | | | ##
+     ## | \  / | ___  _ __ | |_ _   _  | |__| | __ _| | | ##
+     ## | |\/| |/ _ \| '_ \| __| | | | |  __  |/ _` | | | ##
+     ## | |  | | (_) | | | | |_| |_| | | |  | | (_| | | | ##
+     ## |_|  |_|\___/|_| |_|\__|\__, | |_|  |_|\__,_|_|_| ##
+     ##                          __/ |                    ##
+     ##                         |___/        PROBLEM      ##
+     ##                                                   ##
+     #######################################################    
+
+
+  .----------------.    .----------------.    .----------------. 
+ | .--------------. |  | .--------------. |  | .--------------. |
+ | |     __       | |  | |    _____     | |  | |    ______    | |
+ | |    /  |      | |  | |   / ___ `.   | |  | |   / ____ `.  | |
+ | |    `| |      | |  | |  |_/___) |   | |  | |   `'  __) |  | |
+ | |     | |      | |  | |   .'____.'   | |  | |   _  |__ '.  | |
+ | |    _| |_     | |  | |  / /____     | |  | |  | \____) |  | |
+ | |   |_____|    | |  | |  |_______|   | |  | |   \______.'  | |
+ | |              | |  | |              | |  | |              | |
+ | '--------------' |  | '--------------' |  | '--------------' |
+  '----------------'    '----------------'    '----------------' 
+      __________            __________            __________
+     |  __  __  |          |  __  __  |          |  __  __  |
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |__||__| |          | |__||__| |          | |__||__| |
+     |  __  __()|          |  __  __()|          |  __  __()|
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |  ||  | |          | |  ||  | |          | |  ||  | |
+     | |__||__| |          | |__||__| |          | |__||__| |
+     |__________|          |__________|          |__________|
+""")
+
+while True:
+    choice = input("Choose a door: ")
+    try:
+        choice = int(choice)
+    except ValueError:
+        print("Choose 1, 2 or 3")
+        continue
+    else:
+        if choice != 1 and choice != 2 and choice != 3:
+            print("Choose 1, 2 or 3")
+            continue
+        else: break
+
+
+print(f"You have chosen door number {choice}\n")
+
+time.sleep(1)
+
+##Uncomment to cheat
+##print(f"CHOICE: {choice}")
+##print(f"CAR: {car}")
+##print(f"GOATS: {goats}")
+
+if choice == car:
+    host_choice = random.choice(goats)
+    print(f"The host opens door number {host_choice} to reveal a goat.\n")
+    goats.remove(host_choice)
+    print(f"Would you like to swap your door number {choice} for door number {goats[0]}?")
+    while True:
+        answer = input("y/n ")
+        if answer.lower() == "y" or answer.lower() == "n":
+            break
+    if answer.lower() == "y":
+        print(f"You have swapped door number {choice} for door number {goats[0]}.\n")
+        choice = goats[0]
+    else:
+        print(f"You have decided to stick with door number {choice}.\n")
+
+        
+elif choice in goats:
+    goats.remove(choice)
+    host_choice = goats[0]
+    print(f"The host opens door number {host_choice} to reveal a goat.\n")
+    print(f"Would you like to swap your door number {choice} for door number {car}?")
+    while True:
+        answer = input("y/n ")
+        if answer.lower() == "y" or answer.lower() == "n":
+            break
+    if answer.lower() == "y":
+        print(f"You have swapped door number {choice} for door number {car}.\n")
+        choice = car
+    else:
+        print(f"You have decided to stick with door number {choice}.\n")
+        
+
+time.sleep(1)
+
+print(f"The host opens door number {choice} to reveal...\n")
+
+time.sleep(4)
+
+if choice == car:
+    print("YOU HAVE WON A CAR!")
+    time.sleep(2)
+    print('''
+                              _.-="_-         _
+                         _.-="   _-          | ||"""""""---._______     __..
+             ___.===""""-.______-,,,,,,,,,,,,`-''----" """""       """""  __'
+      __.--""     __        ,'                   o \           __        [__|
+ __-""=======.--""  ""--.=================================.--""  ""--.=======:
+]       [w] : /        \ : |========================|    : /        \ :  [w] :
+V___________:|          |: |========================|    :|          |:   _-"
+ V__________: \        / :_|=======================/_____: \        / :__-"
+ -----------'  "-____-"  `-------------------------------'  "-____-"
+ ''')
+
+else:
+    print("You have won a goat.")
+    time.sleep(2)
+    print("""
+
+                     ,,~~--___---,
+                    /            .~,
+              /  _,~             )
+             (_-(~)   ~, ),,,(  /'
+              Z6  .~`' ||     \ |
+              /_,/     ||      ||
+   ~~~~~~~~~~~~~~~~~~~~W`~~~~~~W`~~~~~~~~~~~~~~~
+""")
+
+
+
